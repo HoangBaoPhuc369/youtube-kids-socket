@@ -41,6 +41,7 @@ io.on("connection", (socket) => {
   socket.on("join_room", (data) => {
     socket.join(data);
     console.log(`User with ID: ${socket.id} joined room: ${data}`);
+    socket.to(data).emit("user_join", `User with ID: ${socket.id} joined room: ${data}`);
   });
 
   socket.on("send_message", (data) => {
@@ -49,7 +50,7 @@ io.on("connection", (socket) => {
 
   socket.on("watch_video", (data) => {
     console.log(data);
-    socket.to(data.room).emit("get_watch_video_activity", data);
+    socket.broadcast.to(data.room).emit("get_watch_video_activity", data);
   });
 
   socket.on("disconnect", () => {
