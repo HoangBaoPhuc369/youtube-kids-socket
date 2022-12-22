@@ -45,12 +45,23 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
+    socket.to(data.roomAdmin).emit("message_to_admin", data);
+    socket.to(data.roomVideo).emit("receive_message", data);
   });
 
   socket.on("watch_video", (data) => {
     console.log(data);
     socket.broadcast.to(data.room).emit("get_watch_video_activity", data);
+  });
+
+  socket.on("search_activity", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get_search_activity", data);
+  });
+
+  socket.on("profile_activity", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get_profile_activity", data);
   });
 
   socket.on("disconnect", () => {
