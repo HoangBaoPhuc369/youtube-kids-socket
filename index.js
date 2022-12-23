@@ -64,6 +64,36 @@ io.on("connection", (socket) => {
     socket.broadcast.to(data.room).emit("get_profile_activity", data);
   });
 
+  socket.on("block-video", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-block-video", data);
+  });
+
+  socket.on("clear-block-video", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-clear-block-video", data);
+  });
+
+  socket.on("block-search", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-block-search", data);
+  });
+
+  socket.on("allow-search", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-allow-search", data);
+  });
+
+  socket.on("block-chat", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-block-chat", data);
+  });
+
+  socket.on("allow-chat", (data) => {
+    console.log(data);
+    socket.broadcast.to(data.room).emit("get-allow-chat", data);
+  });
+
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
     removeUser(socket.id);
